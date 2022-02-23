@@ -8,10 +8,10 @@
 // seting telegram
 
 // masukkan token bot yang di dapat dari botfather
-var token = 'TOKEN_BOT';
+var token = '5279719327:AAHykDXczezTep7Hbe2NLvEUX_L7wuTspp4';
 
 // masukkan ID user kamu, untuk mendapatkan notif jika bot terjadi error
-let adminBot = USER_ID;
+let adminBot = 1207111230;
 
 var dataLokasi = {
    "ACEH":[
