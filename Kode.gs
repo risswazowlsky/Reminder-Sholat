@@ -825,7 +825,7 @@ function doPost(e) {
 }
 
 function setWebHookDeploy() {
-  var url_deploy = "URL_DEPLOY";
+  var url_deploy = "https://script.google.com/macros/s/AKfycbxh87kRuwJ8iPpo4c9QZtgjwvIEZ5YwTTEIS139NDyzXz6SyoYeKfWukpHNql6JtSzZ/exec";
   var result = tg.request('setWebhook', tg.buildQuery({
     'url': url_deploy
   }));
