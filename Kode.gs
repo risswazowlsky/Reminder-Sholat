@@ -10,9 +10,6 @@
 // masukkan token bot yang di dapat dari botfather
 var token = '5279719327:AAHykDXczezTep7Hbe2NLvEUX_L7wuTspp4';
 
-// masukan id grup kamu disini
-var chat_id = -1001234685537;
-
 // masukkan ID user kamu, untuk mendapatkan notif jika bot terjadi error
 let adminBot = 1207111230;
 
@@ -150,7 +147,7 @@ let database = {
   },
   lokasi: {
     "id": "1301",
-    "kabko": "KOTA JAKARTA",
+    "daerah": "KOTA JAKARTA",
     "prov": "DKI JAKARTA"
   },
   zona: {
@@ -160,7 +157,7 @@ let database = {
   },
   pengingat: {
     "5 menit": false,
-    "10 menit": false
+    "10 menit": true
   },
 };
 
@@ -301,7 +298,7 @@ function tampilkanJadwal(chat_id) {
 
     // variable pengganti template
     let jadwal = '';
-    let lokasi = infoSholat.lokasi.kabko;
+    let lokasi = infoSholat.lokasi.daerah;
     let daerah = infoSholat.lokasi.prov;
     let hariTanggal = infoSholat.jadwal.tanggal;
     let waktu = waktuSekarang;
@@ -406,7 +403,7 @@ function doPost(e) {
             var jdb = JSON.parse(db);
             pesan += "\n\n🌇 <b>Kota/Kabupaten</b>\n";
             if (jdb.lokasi) {
-              pesan += " └ 📌 " + jdb.lokasi.kabko;
+              pesan += " └ 📌 " + jdb.lokasi.daerah;
             } else {
               pesan += " └ Data Kosong!";
             }
@@ -497,9 +494,9 @@ function doPost(e) {
           }
           if (db != null) {
             var jdb = JSON.parse(db);
-            pesan += "\n\n🌇 <b>Kota/Kabupaten</b>\n";
+            pesan += "\n\n🌇 <b>Pilih Daerah</b>\n";
             if (jdb.lokasi) {
-              pesan += " └ 📌 " + jdb.lokasi.kabko;
+              pesan += " └ 📌 " + jdb.lokasi.daerah;
             } else {
               pesan += " └ Data Kosong!";
             }
@@ -604,7 +601,7 @@ function doPost(e) {
           var pesan = "Silakan pilih <b>Kabupaten/Kota</b>";
           var keyboards = [];
           for (var x of dataLokasi[datas[1]]) {
-            keyboards.push([{text:x.lokasi, callback_data:"kabko_" + datas[1] + "_" + x.lokasi}]);
+            keyboards.push([{text:x.lokasi, callback_data:"daerah" + datas[1] + "_" + x.lokasi}]);
           }
           keyboards.push([{text:"🚶 Kembali", callback_data:"lokasi"}]);
           keyboards.push([{text:"🏠 Utama", callback_data:"utama"}]);
@@ -613,7 +610,7 @@ function doPost(e) {
             "inline_keyboard": keyboards
           }
           tg.editMessageText(chat_id, message_id, null, pesan, 'HTML', true, keyboard);
-        } else if (data.includes("kabko_")) {
+        } else if (data.includes("daerah")) {
           var jdb = getValues(chat_id);
           if (jdb == null) {
             //
@@ -625,12 +622,12 @@ function doPost(e) {
             if (datas[2] == x.lokasi) {
               var lokasi = {};
               lokasi.id = x.id;
-              lokasi.kabko = x.lokasi;
+              lokasi.daerah = x.lokasi;
               lokasi.prov = datas[1];
               jdb.lokasi = lokasi;
-              keyboards.push([{text:x.lokasi + " ✅", callback_data:"kabko_" + datas[1] + "_" + x.lokasi}]);
+              keyboards.push([{text:x.lokasi + " ✅", callback_data:"daerah" + datas[1] + "_" + x.lokasi}]);
             } else {
-              keyboards.push([{text:x.lokasi, callback_data:"kabko_" + datas[1] + "_" + x.lokasi}]);
+              keyboards.push([{text:x.lokasi, callback_data:"daerah" + datas[1] + "_" + x.lokasi}]);
             }
           }
           user.setValue(chat_id, JSON.stringify(jdb));
