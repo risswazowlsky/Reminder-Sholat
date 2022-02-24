@@ -10,6 +10,9 @@
 // masukkan token bot yang di dapat dari botfather
 var token = '5279719327:AAHykDXczezTep7Hbe2NLvEUX_L7wuTspp4';
 
+// masukan id grup kamu disini
+var chat_id = -1001234685537;
+
 // masukkan ID user kamu, untuk mendapatkan notif jika bot terjadi error
 let adminBot = 1207111230;
 
